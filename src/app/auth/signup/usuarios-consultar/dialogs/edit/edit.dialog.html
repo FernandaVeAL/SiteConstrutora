@@ -1,0 +1,48 @@
+<div class="container">
+  <h3 mat-dialog-title>Dados do cliente:</h3>
+  <mat-dialog-content>
+    <form [formGroup]="form" (submit)="confirmEdit(data.id)">
+
+      <mat-form-field class="width">
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput placeholder="Ex. Maria Clara Antônio" formControlName="nome" name="nome" #message1>
+        <mat-error *ngIf="form.get('nome').invalid">Digite um nome válido</mat-error>
+        <mat-hint align="start"><strong>Inserir seu nome completo</strong> </mat-hint>
+        <mat-hint align="end">{{message1.value.length}} / 200</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="width">
+        <mat-label>E-mail</mat-label>
+        <input type="text" matInput placeholder="Ex. usuario@login.com" formControlName="email" name="email" #message2>
+        <mat-error *ngIf="form.get('email').invalid">Digite um email válido</mat-error>
+        <mat-hint align="start"><strong>Inserir o e-mail de login</strong> </mat-hint>
+        <mat-hint align="end">{{message2.value.length}} / 30</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="width">
+        <mat-label>CPF ou CNPJ</mat-label>
+        <input type="text" matInput placeholder="Ex. XXX.XXX.XXX-XX ou XX.XXX.XXX/YYYY-ZZ" formControlName="cpf"
+          name="cpf" #message3>
+        <mat-error *ngIf="form.get('cpf').invalid">Digite um CPF ou CNPJ válido</mat-error>
+        <mat-hint align="start"><strong>Inserir seu CPF ou CNPJ com ponto(.) e traço(-)</strong> </mat-hint>
+        <mat-hint align="end">{{message3.value.length}} / 14</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="width">
+        <mat-label>Telefone de Contato</mat-label>
+        <input type="text" matInput placeholder="Ex. (XX)XXXXX-XXXX" formControlName="telefone" name="telefone"
+          #message4>
+        <mat-error *ngIf="form.get('telefone').invalid">Digite um telefone válido</mat-error>
+        <mat-hint align="start"><strong>Inserir seu número de celuar com DDD</strong> </mat-hint>
+        <mat-hint align="end">{{message4.value.length}} / 14</mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="button">Salvar</button>
+
+    </form>
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+
+    <button mat-button (click)="onNoClick()" tabindex="-1">Fechar</button>
+  </div>
+</div>

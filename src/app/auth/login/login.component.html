@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-content>
+
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput required type="text" matInput placeholder="email" name="email" ngModel #email="ngModel">
+        <mat-hint align="start"><strong>Informar o e-mail de login</strong> </mat-hint>
+
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput maxlength="256" placeholder="A senha é composta por números, letras e símbolos" name="senha"
+          ngModel #senha="ngModel">
+        <mat-hint align="start"><strong>Informar a senha de login</strong> </mat-hint>
+
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="button">Logar</button>
+
+    </form>
+  </mat-card-content>
+
+</mat-card>

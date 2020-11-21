@@ -1,0 +1,117 @@
+<mat-card>
+
+  <form (submit)="onAdicionarObra(obraForm)" #obraForm="ngForm">
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Data de Início</mat-label>
+      <input type="date" matInput #message1 name="inicio" ngModel #inicioInput="ngModel" maxlength="10"
+        placeholder="Ex. XX/XX/XXXX">
+      <mat-hint align="start"><strong>Inserir a data de início</strong> </mat-hint>
+      <mat-hint align="end">{{message1.value.length}} / 10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Data de Término</mat-label>
+      <input type="date" matInput #message2 name="termino" ngModel #terminoInput="ngModel" maxlength="10"
+        placeholder="Ex. XX/XX/XXXX ou em processo">
+      <mat-hint align="start"><strong>Inserir a data de término</strong> </mat-hint>
+      <mat-hint align="end">{{message2.value.length}} / 10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Tipo de Obra</mat-label>
+      <input matInput #message3 name="tipo" ngModel #tipoInput="ngModel" maxlength="30"
+        placeholder="Ex. Residencial ou industrial">
+      <mat-hint align="start"><strong>Inserir o tipo da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message3.value.length}} / 30</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Porte</mat-label>
+      <input matInput #message4 name="porte" ngModel #porteInput="ngModel" maxlength="30"
+        placeholder="Ex. 300 metros ao quadrado (m²)">
+      <mat-hint align="start"><strong>Informar a metragem da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message4.value.length}} / 30</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Endereço</mat-label>
+      <input matInput #message5 name="endereco" ngModel #enderecoInput="ngModel" maxlength="40"
+        placeholder="Ex. Rua xxxxxx">
+      <mat-hint align="start"><strong>Informar o endereço</strong> </mat-hint>
+      <mat-hint align="end">{{message5.value.length}} / 40</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Número</mat-label>
+      <input matInput #message6 name="numero" ngModel #numeroInput="ngModel" maxlength="10"
+        placeholder="Ex. Rua xxxxxx">
+      <mat-hint align="start"><strong>Informar o número</strong> </mat-hint>
+      <mat-hint align="end">{{message6.value.length}} / 10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Bairro</mat-label>
+      <input matInput #message7 name="bairro" ngModel #bairroInput="ngModel" maxlength="20" placeholder="Ex. Centro">
+      <mat-hint align="start"><strong>Informar o bairro da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message7.value.length}} / 20</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Cidade</mat-label>
+      <input matInput #message8 name="cidade" ngModel #cidadeInput="ngModel" maxlength="20" placeholder="Ex. São Paulo">
+      <mat-hint align="start"><strong>Informar a acidade da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message8.value.length}} / 20</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Estado</mat-label>
+      <input matInput #message9 name="estado" ngModel #estadoInput="ngModel" maxlength="20" placeholder="Ex. São Paulo">
+      <mat-hint align="start"><strong>Informar o estado da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message9.value.length}} / 20</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Complemento</mat-label>
+      <input matInput #message10 name="complemento" ngModel #complementoInput="ngModel" maxlength="8"
+        placeholder="Ex. XXX">
+      <mat-hint align="start"><strong>Informar o número da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message10.value.length}} / 8</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>CEP</mat-label>
+      <input matInput #message11 name="cep" ngModel #cepInput="ngModel" maxlength="10" placeholder="Ex. XXXXX-XXX">
+      <mat-hint align="start"><strong>Informar o CEP da localização da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message11.value.length}} / 10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Aviso</mat-label>
+      <input matInput #message12 name="aviso" ngModel #avisoInput="ngModel" maxlength="300"
+        placeholder="Ex. Os tais documentos estão faltando...">
+      <mat-hint align="start"><strong>Avisos da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message12.value.length}} / 300</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Progresso</mat-label>
+      <input matInput #message13 name="progresso" ngModel #progressoInput="ngModel" maxlength="300"
+        placeholder="Ex. Primeira estapa está em processo...">
+      <mat-hint align="start"><strong>Descrever o progresso da obra</strong> </mat-hint>
+      <mat-hint align="end">{{message13.value.length}} / 300</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Breve Descrição da Obra</mat-label>
+      <input matInput #message14 name="descricao" ngModel #descricaoInput="ngModel" maxlength="500"
+        placeholder="Ex. Eu gostaria de reformar a cozinha da minha casa, trocar o piso...">
+      <mat-hint align="start"><strong>Descrever a obra que pretende fazer</strong> </mat-hint>
+      <mat-hint align="end">{{message14.value.length}} / 500</mat-hint>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="button">Cadastrar Obrar</button>
+
+  </form>
+
+</mat-card>

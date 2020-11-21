@@ -1,0 +1,51 @@
+<mat-card>
+
+  <form (submit)="onAdicionarUsuario(usuarioForm)" #usuarioForm="ngForm">
+
+    <mat-form-field class="width">
+      <mat-label>Nome</mat-label>
+      <input required matInput #message1 name="nome" ngModel #nomeInput="ngModel" maxlength="200"
+        placeholder="Ex. Maria Clara Antônio">
+      <mat-hint align="start"><strong>Inserir seu nome completo</strong> </mat-hint>
+      <mat-hint align="end">{{message1.value.length}} / 30</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="width">
+      <mat-label>E-mail</mat-label>
+      <input required type="email" matInput #message2 name="email" ngModel #emailInput="ngModel" maxlength="30"
+        placeholder="Ex. usuario@login.com">
+      <mat-hint align="start"><strong>Inserir o e-mail de login</strong> </mat-hint>
+      <mat-hint align="end">{{message2.value.length}} / 30</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="tipoUsuario === 'cliente'" class="width">
+      <mat-label>CPF ou CNPJ</mat-label>
+      <input required matInput #message3 name="cpf" ngModel #cpfInput="ngModel" maxlength="14"
+        placeholder="Ex. XXX.XXX.XXX-XX ou XX.XXX.XXX/YYYY-ZZ">
+      <mat-hint align="start"><strong>Inserir seu CPF ou CNPJ com ponto(.) e traço(-)</strong> </mat-hint>
+      <mat-hint align="end">{{message3.value.length}} / 14</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="width">
+      <mat-label>Telefone de Contato</mat-label>
+      <input type="tel" required matInput #message4 name="telefone" ngModel #telefoneInput="ngModel" maxlength="14"
+        placeholder="Ex. (XX)XXXXX-XXXX">
+      <mat-hint align="start"><strong>Inserir seu número de celuar com DDD</strong> </mat-hint>
+      <mat-hint align="end">{{message4.value.length}} / 14</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="width">
+      <mat-label>Senha</mat-label>
+      <input required type="password" name="senha" ngModel #senhaInput="ngModel" matInput #message5 minlength="8"
+        placeholder="Ex. XXXXXXXX">
+      <mat-hint align="start"><strong>Inserir uma senha de no mínimo 8 caracteres composta de números, letras e
+          símbolos</strong>
+      </mat-hint>
+      <mat-hint align="end">{{message5.value.length}} / 8</mat-hint>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="button">Cadastrar</button>
+
+  </form>
+
+</mat-card>

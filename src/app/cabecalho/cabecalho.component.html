@@ -1,0 +1,49 @@
+<mat-toolbar color='primary'>
+  <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+
+  <span>RMK PROJETOS</span>
+  <span class="example-spacer"></span>
+
+  <button mat-button><span>MENU</span></button>
+
+  <button mat-button><span>QUEM SOMOS</span></button>
+
+  <button *ngIf="autenticado" mat-button [matMenuTriggerFor]="belowObras">OBRAS</button>
+  <mat-menu #belowObras="matMenu" yPosition="below">
+    <button mat-menu-item routerLink="Obra/Solicitar" routerLinkActive="active">SOLICITAR OBRA</button>
+    <button *ngIf="tipoUsuario === 'funcionario'" mat-menu-item routerLink="Obra/Cadastar"
+      routerLinkActive="active">CADASTRAR OBRA</button>
+    <button mat-menu-item routerLink="Obra/Consultar" routerLinkActive="active">CONSULTAR OBRA</button>
+  </mat-menu>
+
+  <button *ngIf="autenticado && tipoUsuario === 'funcionario'" mat-button
+    [matMenuTriggerFor]="belowFunc">FUNCIONÁRIOS</button>
+  <mat-menu #belowFunc="matMenu" yPosition="below">
+    <button mat-menu-item routerLink="Usuario/Cadastrar/funcionario" routerLinkActive="active">CADASTRAR
+      FUNCIONÁRIO</button>
+    <button mat-menu-item routerLink="Usuario/Consultar/funcionario" routerLinkActive="active">CONSULTAR
+      FUNCIONÁRIO</button>
+  </mat-menu>
+
+  <button *ngIf="autenticado && tipoUsuario === 'funcionario'" mat-button
+    [matMenuTriggerFor]="belowCli">CLIENTES</button>
+  <mat-menu #belowCli="matMenu" yPosition="below">
+    <button mat-menu-item routerLink="Usuario/Cadastrar/cliente" routerLinkActive="active">CADASTRAR CLIENTE</button>
+    <button mat-menu-item routerLink="Usuario/Consultar/cliente" routerLinkActive="active">CONSULTAR CLIENTE</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowContato">CONTATO</button>
+  <mat-menu #belowContato="matMenu" yPosition="below">
+    <button *ngIf="tipoUsuario === 'cliente'" mat-menu-item routerLink="/Email"
+      routerLinkActive="active">E-MAIL</button>
+    <button mat-menu-item>CHAT</button>
+  </mat-menu>
+
+  <button *ngIf="!autenticado" mat-button routerLink="Usuario/Cadastrar/cadastroGeral"
+    routerLinkActive="active">CADASTRAR-SE</button>
+  <button *ngIf="!autenticado" mat-button routerLink="Login" routerLinkActive="active"><span>LOGIN</span></button>
+  <button *ngIf="autenticado" mat-button><span>LOGOUT</span></button>
+
+</mat-toolbar>
+
+<router-outlet></router-outlet>

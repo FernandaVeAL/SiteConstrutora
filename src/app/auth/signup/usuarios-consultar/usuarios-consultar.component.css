@@ -1,0 +1,19 @@
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.table-container {
+  width: 95%;
+  flex: 1 1 auto;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+}
+
+td.footer {
+  font-style: italic;
+  text-align: center;
+}
