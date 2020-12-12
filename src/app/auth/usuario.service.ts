@@ -65,8 +65,39 @@ export class UsuarioService {
   getListaDeUsuariosAtualizadaObservable() {
     return this.listaUsuariosAtualizada.asObservable();
   }
-  getUsuarios(pagesize: number, page: number): void {
-    const parametros = `?pagesize=${pagesize}&page=${page}`;
+  getListaUsuarios(): void {
+    console.log('CHAMOU');
+    this.httpClient
+      .get<{ mensagem: string; usuarios: any }>(
+        'http://localhost:3000/api/usuarios?tipoUsuario=cliente'
+      )
+      .pipe(
+        map((dados) => {
+          console.log(dados);
+          return {
+            listaUsuarios: dados.usuarios.map((usuario) => {
+              return {
+                id: usuario._id,
+                nome: usuario.nome,
+                cpf: usuario.cpf,
+                email: usuario.email,
+                telefone: usuario.telefone,
+              };
+            }),
+          };
+        })
+      )
+      .subscribe((dados) => {
+        console.log(dados);
+        this.usuarios = dados.listaUsuarios;
+        this.listaUsuariosAtualizada.next({
+          usuarios: [...this.usuarios],
+          maxUsuarios: 0,
+        });
+      });
+  }
+  getUsuarios(pagesize: number, page: number, tipoUsuario: string): void {
+    const parametros = `?pagesize=${pagesize}&page=${page}&tipoUsuario=${tipoUsuario}`;
     this.httpClient
       .get<{ mensagem: string; usuarios: any; maxUsuarios: number }>(
         'http://localhost:3000/api/usuarios' + parametros
@@ -101,6 +132,7 @@ export class UsuarioService {
       nome: string;
       fone: string;
       email: string;
+      tipoUsuario: string;
     }>(`http://localhost:3000/api/Usuarios/${id}`);
   }
 
@@ -133,27 +165,42 @@ export class UsuarioService {
       senha: senha,
     };
     this.httpClient
-      .post<{ token: string; tipoUsuario: string }>(
+      .post<{ token: string; tipoUsuario: string; idUsuario: string }>(
         'http://localhost:3000/api/usuarios/login',
         authData
       )
       .subscribe((resposta) => {
         this.token = resposta.token;
         if (this.token) {
+          this.salvarDadosLocalmente(
+            resposta.token,
+            resposta.tipoUsuario,
+            resposta.idUsuario
+          );
           this.autenticado = true;
           this.authStatusSubject.next(true);
-          this.salvarDadosLocalmente(resposta.token, resposta.tipoUsuario);
+          this.router.navigate(['/Menu']);
         }
       });
   }
   logout() {
     this.token = null;
     this.authStatusSubject.next(false);
-    localStorage.removeItem('tipoUsuario');
+    this.DeletarDadosLocalmente();
     this.tipoUsuario = null;
+    this.router.navigate(['/Menu']);
   }
-  salvarDadosLocalmente(token: string, tipoUsuario: string) {
-    localStorage.setItem('token', token);
-    localStorage.setItem('tipoUsuario', tipoUsuario);
+  salvarDadosLocalmente(token: string, tipoUsuario: string, idUsuario: string) {
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('tipoUsuario', tipoUsuario);
+    sessionStorage.setItem('idUsuario', idUsuario);
+  }
+  DeletarDadosLocalmente() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('tipoUsuario');
+    sessionStorage.removeItem('idUsuario');
+  }
+  getIdUsuario() {
+    return sessionStorage.getItem('idUsuario');
   }
 }

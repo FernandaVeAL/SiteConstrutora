@@ -1,1 +1,77 @@
-<p>solicitacao-obras works!</p>
+<form [formGroup]="form" (submit)="onAdicionarSolicitacao()">
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Tipo de Obra</mat-label>
+    <input matInput #message3 formControlName="tipo" name="tipo" maxlength="30"
+      placeholder="Ex. Residencial ou industrial">
+    <mat-hint align="start"><strong>Inserir o tipo da obra</strong> </mat-hint>
+    <mat-hint align="end">{{message3.value.length}} / 30</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Porte</mat-label>
+    <input matInput #message4 name="porte" formControlName="porte" maxlength="30"
+      placeholder="Ex. 300 metros ao quadrado (m²)">
+    <mat-hint align="start"><strong>Informar a metragem da obra</strong> </mat-hint>
+    <mat-hint align="end">{{message4.value.length}} / 30</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Endereço</mat-label>
+    <input matInput #message5 name="endereco" formControlName="endereco" maxlength="40" placeholder="Ex. Rua xxxxxx">
+    <mat-hint align="start"><strong>Informar o endereço</strong> </mat-hint>
+    <mat-hint align="end">{{message5.value.length}} / 40</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Número</mat-label>
+    <input matInput #message6 name="numero" formControlName="numero" maxlength="10" placeholder="Ex. Rua xxxxxx">
+    <mat-hint align="start"><strong>Informar o número</strong> </mat-hint>
+    <mat-hint align="end">{{message6.value.length}} / 10</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Bairro</mat-label>
+    <input matInput #message7 name="bairro" formControlName="bairro" maxlength="20" placeholder="Ex. Centro">
+    <mat-hint align="start"><strong>Informar o bairro da obra</strong> </mat-hint>
+    <mat-hint align="end">{{message7.value.length}} / 20</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Cidade</mat-label>
+    <input matInput #message8 name="cidade" formControlName="cidade" maxlength="20" placeholder="Ex. São Paulo">
+    <mat-hint align="start"><strong>Informar a acidade da obra</strong> </mat-hint>
+    <mat-hint align="end">{{message8.value.length}} / 20</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Estado</mat-label>
+    <input matInput #message9 name="estado" formControlName="estado" maxlength="20" placeholder="Ex. São Paulo">
+    <mat-hint align="start"><strong>Informar o estado da obra</strong> </mat-hint>
+    <mat-hint align="end">{{message9.value.length}} / 20</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Complemento</mat-label>
+    <input matInput #message10 name="complemento" formControlName="complemento" maxlength="8" placeholder="Ex. XXX">
+    <mat-hint align="start"><strong>Informar o número da obra</strong> </mat-hint>
+    <mat-hint align="end">{{message10.value.length}} / 8</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>CEP</mat-label>
+    <input matInput #message11 name="cep" formControlName="cep" maxlength="10" placeholder="Ex. XXXXX-XXX">
+    <mat-hint align="start"><strong>Informar o CEP da localização da obra</strong> </mat-hint>
+    <mat-hint align="end">{{message11.value.length}} / 10</mat-hint>
+  </mat-form-field>
+  <div>
+
+    <button (click)="selecionaArquivo.click()" mat-stroked-button type="button">SELECIONAR IMAGEM</button>
+    <input type="file" (change)="onImagemSelecionada($event)" #selecionaArquivo>
+    <div class="imagem-preview">
+      <img [src]="previewImagem" *ngIf="previewImagem && previewImagem !== ''&& form.get('imagem').valid "
+        [alt]="form.value.nome">
+    </div>
+  </div>
+  <button mat-raised-button color="primary" class="button">Salvar</button>
+</form>

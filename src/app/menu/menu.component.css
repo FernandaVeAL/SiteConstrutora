@@ -1,0 +1,13 @@
+h1, p {
+  text-align: center;
+  color: darkblue;
+}
+
+p {
+  width: 80vw;
+  margin: 10vh auto 10vh auto;
+}
+
+main {
+  padding-bottom: 10%;
+}

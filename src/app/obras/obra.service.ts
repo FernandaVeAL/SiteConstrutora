@@ -24,7 +24,8 @@ export class ObraService {
     cep: string,
     aviso: string,
     progresso: string,
-    descricao: string
+    descricao: string,
+    idCliente: string
   ) {
     const obra: any = {
       id: null,
@@ -42,6 +43,7 @@ export class ObraService {
       aviso: aviso,
       progresso: progresso,
       descricao: descricao,
+      idCliente: idCliente,
     };
     this.obras.push(obra);
     this.listaObrasAtualizada.next([...this.obras]);
@@ -82,6 +84,46 @@ export class ObraService {
               aviso: obra.aviso,
               progresso: obra.progresso,
               descricao: obra.descricao,
+              datap1: obra.data1,
+              desp1: obra.desp1,
+              datap2: obra.data2,
+              desp2: obra.desp2,
+              datap3: obra.data3,
+              desp3: obra.desp3,
+            };
+          });
+        })
+      )
+      .subscribe((obras) => {
+        this.obras = obras;
+        this.listaObrasAtualizada.next([...this.obras]);
+      });
+  }
+  getObrasById(idCliente: string): void {
+    this.httpClient
+      .get<{ mensagem: string; obras: any }>(
+        'http://localhost:3000/api/obras?idCliente=' + idCliente
+      )
+      .pipe(
+        map((dados) => {
+          return dados.obras.map((obra) => {
+            return {
+              id: obra._id,
+              inicio: obra.inicio,
+              termino: obra.termino,
+              tipo: obra.tipo,
+              porte: obra.porte,
+              endereco: obra.endereco,
+              numero: obra.numero,
+              bairro: obra.bairro,
+              cidade: obra.cidade,
+              estado: obra.estado,
+              complemento: obra.complemento,
+              cep: obra.cep,
+              aviso: obra.aviso,
+              progresso: obra.progresso,
+              descricao: obra.descricao,
+              idCliente: obra.idCliente,
               datap1: obra.data1,
               desp1: obra.desp1,
               datap2: obra.data2,
@@ -161,6 +203,34 @@ export class ObraService {
       aviso,
       progresso,
       descricao,
+    };
+    this.httpClient
+      .put(`http://localhost:3000/api/obras/${id}`, obra)
+      .subscribe((res) => {
+        const copia = [...this.obras];
+        const indice = copia.findIndex((obr) => obr.id === obra.id);
+        copia[indice] = obra;
+        this.obras = copia;
+        this.listaObrasAtualizada.next([...this.obras]);
+      });
+  }
+  atualizarDataObra(
+    id: string,
+    datap1: string,
+    desp1: string,
+    datap2: string,
+    desp2: string,
+    datap3: string,
+    desp3: string
+  ) {
+    const obra: any = {
+      id,
+      datap1,
+      desp1,
+      datap2,
+      desp2,
+      datap3,
+      desp3,
     };
     this.httpClient
       .put(`http://localhost:3000/api/obras/${id}`, obra)

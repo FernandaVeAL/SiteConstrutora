@@ -15,3 +15,8 @@ mat-card {
 .button {
   width: 100%;
 }
+
+:host {
+  position: relative;
+  height: 100%;
+}

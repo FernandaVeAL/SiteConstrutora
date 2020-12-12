@@ -7,6 +7,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { EditComponent } from './dialogs/edit/edit.dialog';
 import { DeleteComponent } from './dialogs/delete/delete.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios-consultar',
@@ -33,6 +34,7 @@ export class UsuariosConsultarComponent implements OnInit, OnDestroy {
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   private usuariosSubscription: Subscription;
+  private tipoUsuario: string;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -40,13 +42,18 @@ export class UsuariosConsultarComponent implements OnInit, OnDestroy {
   }
   constructor(
     public usuarioService: UsuarioService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.usuarioService.getUsuarios(
-      this.totalDeUsuariosPorPagina,
-      this.paginaAtual
-    );
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      this.tipoUsuario = paramMap.get('tipoUsuario');
+      this.usuarioService.getUsuarios(
+        this.totalDeUsuariosPorPagina,
+        this.paginaAtual,
+        this.tipoUsuario
+      );
+    });
     this.usuariosSubscription = this.usuarioService
       .getListaDeUsuariosAtualizadaObservable()
       .subscribe((dados: { usuarios: []; maxUsuarios: number }) => {
@@ -59,7 +66,8 @@ export class UsuariosConsultarComponent implements OnInit, OnDestroy {
     this.totalDeUsuariosPorPagina = dadosPagina.pageSize;
     this.usuarioService.getUsuarios(
       this.totalDeUsuariosPorPagina,
-      this.paginaAtual
+      this.paginaAtual,
+      this.tipoUsuario
     );
   }
   ngOnDestroy(): void {

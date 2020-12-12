@@ -17,8 +17,11 @@ export class CabecalhoComponent implements OnInit, OnDestroy {
     this.authObserver = this.usuarioService
       .getStatusSubject()
       .subscribe((autenticado) => {
+        console.log(autenticado);
         this.autenticado = autenticado;
-        this.tipoUsuario = localStorage.getItem('tipoUsuario');
+        this.tipoUsuario = this.autenticado
+          ? sessionStorage.getItem('tipoUsuario')
+          : 'Sem Resultado';
         console.log(this.tipoUsuario);
       });
     this.tipoUsuario = this.usuarioService.getTipoUsuario();

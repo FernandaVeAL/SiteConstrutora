@@ -4,6 +4,7 @@ const Usuario = require("../models/usuario");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const checkAuth = require("../middleware/check-auth");
+const senhas = require("../senha");
 
 router.post("", (req, res, next) => {
   console.log(req.body);
@@ -28,7 +29,8 @@ router.post("", (req, res, next) => {
 router.get("", (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const page = +req.query.page;
-  const consulta = Usuario.find();
+  console.log(req.query.tipoUsuario);
+  const consulta = Usuario.find({ tipoUsuario: req.query.tipoUsuario });
   let usuariosEncontrados;
   if (pageSize && page) {
     consulta.skip(pageSize * (page - 1)).limit(pageSize);
@@ -39,6 +41,7 @@ router.get("", (req, res, next) => {
       return Usuario.countDocuments();
     })
     .then((count) => {
+      console.log(usuariosEncontrados);
       res.status(200).json({
         mensagem: "Tudo OK",
         usuarios: usuariosEncontrados,
@@ -103,10 +106,14 @@ router.post("/login", (req, res, next) => {
       }
       const token = jwt.sign(
         { email: user.email, id: user._id },
-        "minhasenha",
+        senhas.senhatoken,
         { expiresIn: "1h" }
       );
-      res.status(200).json({ token: token, tipoUsuario: user.tipoUsuario });
+      res.status(200).json({
+        token: token,
+        tipoUsuario: user.tipoUsuario,
+        idUsuario: user._id,
+      });
     })
     .catch((err) => {
       return res.status(401).json({

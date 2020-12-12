@@ -1,0 +1,21 @@
+<body>
+  <mat-carousel timings="500ms ease-in" [autoplay]="true" interval="5000" color="primary" maxWidth="auto"
+    proportion="25" slides="5" [loop]="true" [hideArrows]="false" [hideIndicators]="false" [useKeyboard]="true"
+    [useMouseWheel]="false" orientation="ltr">
+    <mat-carousel-slide #matCarouselSlide *ngFor="let slide of slides; let i = index" [image]="slide.img"
+      overlayColor="#00000040" [hideOverlay]="false"></mat-carousel-slide>
+  </mat-carousel>
+  <main>
+    <h1>Quem Somos?</h1>
+    <p>Somos uma empresa administrada com seriedade, orientada para a qualidade, nos preocupamos com a qualidade de cada
+      serviço, satisfazendo cada cliente e usuário de nosso trabalho, esgotamos a cada dia nossas possibilidades para
+      oferecer o melhor aos nossos clientes.</p>
+    <p>A RMK ocupa uma posição privilegiada no mercado, situando-se entre as principais empresas do ramo. É uma sólida
+      empresa, embasada no bom relacionamento com seus clientes, num segmento em que credibilidade, confiança e respeito
+      mútuo são fundamentais no desempenho das atividades.</p>
+    <p> Em sua sede na Rua Itinguçú, 1527, Vila Ré, São Paulo, está concentrado todo o controle administrativo da
+      empresa, dividido em departamentos totalmente informatizado que interagem, funcionando de maneira integrada,
+      voltada para o atendimento ideal aos clientes.</p>
+  </main>
+
+</body>

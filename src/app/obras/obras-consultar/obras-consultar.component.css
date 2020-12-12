@@ -20,7 +20,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-detail {
   overflow: hidden;
-  display: flex;
+  /* display: flex; */
 }
 
 .example-element-description {
@@ -51,4 +51,17 @@ tr.example-element-row:not(.example-expanded-row):active {
   width: 95%;
   flex: 1 1 auto;
   margin: auto;
+}
+
+.horizontal {
+  display: flex;
+  align-items: flex-end;
+}
+
+.botoes {
+  margin-left: auto;
+}
+
+button {
+  margin: 10px 10px 10px 10px;
 }

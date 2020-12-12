@@ -1,6 +1,6 @@
 <mat-card>
-
-  <form (submit)="onAdicionarObra(obraForm)" #obraForm="ngForm">
+  <mat-spinner *ngIf="estaCarregando"></mat-spinner>
+  <form (submit)="onAdicionarObra(obraForm)" #obraForm="ngForm" *ngIf="!estaCarregando">
 
     <mat-form-field class="example-full-width">
       <mat-label>Data de Início</mat-label>
@@ -108,6 +108,16 @@
         placeholder="Ex. Eu gostaria de reformar a cozinha da minha casa, trocar o piso...">
       <mat-hint align="start"><strong>Descrever a obra que pretende fazer</strong> </mat-hint>
       <mat-hint align="end">{{message14.value.length}} / 500</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        Cliente
+      </mat-label>
+      <mat-select [(value)]="usuarioSelecionado">
+        <mat-option *ngFor="let usuario of usuarios" [value]="usuario.id"> {{usuario.nome}}</mat-option>
+      </mat-select>
+
     </mat-form-field>
 
     <button mat-raised-button color="primary" class="button">Cadastrar Obrar</button>

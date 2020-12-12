@@ -5,11 +5,11 @@ const mongoose = require("mongoose");
 app.use(bodyParser.json());
 const usuarioRoutes = require("./rotas/usuarios");
 const obraRoutes = require("./rotas/obras");
+const solicitacoesRoutes = require("./rotas/solicitacoes");
+const senhas = require("./senha");
 
 mongoose
-  .connect(
-    "mongodb+srv://fefa:senha@cluster0.y6usl.mongodb.net/projeto?retryWrites=true&w=majority"
-  )
+  .connect(senhas.stringdeConeccaoMongo)
   .then(() => console.log("Conexão OK"))
   .catch(() => console.log("Conexão NOK"));
 
@@ -28,5 +28,6 @@ app.use((req, res, next) => {
 
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/obras", obraRoutes);
+app.use("/api/solicitacoes", solicitacoesRoutes);
 
 module.exports = app;

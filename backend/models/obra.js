@@ -15,6 +15,7 @@ const obraSchema = mongoose.Schema({
   aviso: { type: String, required: false },
   progresso: { type: String, required: false },
   descricao: { type: String, required: true },
+  idCliente: { type: String, required: true },
   datap1: { type: String, required: false },
   desp1: { type: String, required: false },
   datap2: { type: String, required: false },

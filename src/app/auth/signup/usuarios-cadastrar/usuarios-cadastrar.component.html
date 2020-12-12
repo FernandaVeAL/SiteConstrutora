@@ -1,6 +1,6 @@
 <mat-card>
-
-  <form (submit)="onAdicionarUsuario(usuarioForm)" #usuarioForm="ngForm">
+  <mat-spinner *ngIf="estaCarregando"></mat-spinner>
+  <form (submit)="onAdicionarUsuario(usuarioForm)" #usuarioForm="ngForm" *ngIf="!estaCarregando">
 
     <mat-form-field class="width">
       <mat-label>Nome</mat-label>

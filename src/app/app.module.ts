@@ -15,6 +15,7 @@ import { DeleteComponent } from './auth/signup/usuarios-consultar/dialogs/delete
 import { EditComponent } from './auth/signup/usuarios-consultar/dialogs/edit/edit.dialog';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { MenuComponent } from './menu/menu.component';
 
 import { ObraService } from './obras/obra.service';
 import { UsuarioService } from './auth/usuario.service';
@@ -34,6 +35,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCarouselModule } from '@ngbmodule/material-carousel';
+import { AuthGuard } from './auth/auth.guard';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -48,6 +54,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SolicitacaoObrasComponent,
     DeleteComponent,
     EditComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +76,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatPaginatorModule,
     MatFormFieldModule,
+    MatGridListModule,
+    MatCarouselModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
   ],
   entryComponents: [EditComponent, DeleteComponent],
   providers: [

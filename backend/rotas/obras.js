@@ -19,6 +19,7 @@ router.post("", (req, res, next) => {
     aviso: req.body.aviso,
     progresso: req.body.progresso,
     descricao: req.body.descricao,
+    idCliente: req.body.idCliente,
   });
   obra.save().then((obraInserido) => {
     res.status(201).json({
@@ -29,11 +30,18 @@ router.post("", (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Obra.find().then((documents) => {
+  let consulta;
+  console.log(req.query);
+  if (req.query.idCliente) {
+    consulta = Obra.find({ idCliente: req.query.idCliente });
+  } else {
+    consulta = Obra.find();
+  }
+  consulta.then((documents) => {
     console.log(documents);
     res.status(200).json({
       mensagem: "Tudo OK",
-      obra: documents,
+      obras: documents,
     });
   });
 });

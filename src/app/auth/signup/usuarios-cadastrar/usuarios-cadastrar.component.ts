@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UsuariosCadastrarComponent implements OnInit {
   public tipoUsuario: string;
+  public estaCarregando: boolean = false;
   constructor(
     private usuarioService: UsuarioService,
     public route: ActivatedRoute
@@ -19,7 +20,7 @@ export class UsuariosCadastrarComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    console.log(form.value);
+    this.estaCarregando = true;
     const usuario: any = {
       nome: form.value.nome,
       email: form.value.email,
@@ -41,7 +42,6 @@ export class UsuariosCadastrarComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
       this.tipoUsuario = paramMap.get('tipoUsuario');
-      console.log(this.tipoUsuario);
     });
   }
 }

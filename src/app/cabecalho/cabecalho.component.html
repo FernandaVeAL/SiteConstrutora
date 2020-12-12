@@ -4,14 +4,15 @@
   <span>RMK PROJETOS</span>
   <span class="example-spacer"></span>
 
-  <button mat-button><span>MENU</span></button>
+  <button mat-button routerLink="Menu" routerLinkActive="active"><span>MENU</span></button>
 
   <button mat-button><span>QUEM SOMOS</span></button>
 
   <button *ngIf="autenticado" mat-button [matMenuTriggerFor]="belowObras">OBRAS</button>
   <mat-menu #belowObras="matMenu" yPosition="below">
-    <button mat-menu-item routerLink="Obra/Solicitar" routerLinkActive="active">SOLICITAR OBRA</button>
-    <button *ngIf="tipoUsuario === 'funcionario'" mat-menu-item routerLink="Obra/Cadastar"
+    <button *ngIf="tipoUsuario === 'cliente'" mat-menu-item routerLink="Obra/Solicitar"
+      routerLinkActive="active">SOLICITAR OBRA</button>
+    <button *ngIf="tipoUsuario === 'funcionario'" mat-menu-item routerLink="Obra/Cadastrar"
       routerLinkActive="active">CADASTRAR OBRA</button>
     <button mat-menu-item routerLink="Obra/Consultar" routerLinkActive="active">CONSULTAR OBRA</button>
   </mat-menu>
@@ -39,10 +40,10 @@
     <button mat-menu-item>CHAT</button>
   </mat-menu>
 
-  <button *ngIf="!autenticado" mat-button routerLink="Usuario/Cadastrar/cadastroGeral"
+  <button *ngIf="!autenticado" mat-button routerLink="Usuario/Cadastrar/cliente"
     routerLinkActive="active">CADASTRAR-SE</button>
   <button *ngIf="!autenticado" mat-button routerLink="Login" routerLinkActive="active"><span>LOGIN</span></button>
-  <button *ngIf="autenticado" mat-button><span>LOGOUT</span></button>
+  <button *ngIf="autenticado" (click)="onLogout()" mat-button><span>LOGOUT</span></button>
 
 </mat-toolbar>
 
